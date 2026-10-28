@@ -1,0 +1,91 @@
+[
+  {
+    "id": "diskclean", "name": "Diskclean", "group": "products", "date": null,
+    "description": { "ru": "Анализатор дискового пространства для Linux и Windows. Визуализация занятого места, поиск дубликатов и безопасная очистка.", "en": "A disk usage analyzer for Linux and Windows with storage visualization, duplicate detection, and safe cleanup." },
+    "contribution": { "ru": "Самостоятельная разработка CLI, графического интерфейса и логики анализа и очистки.", "en": "Independent development of the CLI, graphical interface, analysis, and cleanup logic." },
+    "technologies": ["Rust", "egui", "Rayon", "Serde", "Clap", "BLAKE3"], "repo": "diskclean", "role": "solo",
+    "source": "../Disk-cleanup/README.md"
+  },
+  {
+    "id": "osb-docs-generator", "name": "OSB Docs Generator", "group": "amazing", "date": null,
+    "description": { "ru": "Генератор документов для ОСБ.", "en": "A document generator for OSB." },
+    "technologies": [], "repo": "OSB-docs-generator", "role": "solo", "needsReview": true
+  },
+  {
+    "id": "osb-raport-generator-weba", "name": "OSB Report Generator · Web", "group": "amazing", "date": null,
+    "description": { "ru": "Веб-версия генератора рапортов ОСБ.", "en": "A web version of the OSB report generator." },
+    "technologies": [], "repo": "osb-raport-generator-weba", "role": "solo", "needsReview": true
+  },
+  {
+    "id": "amazing-rp-overlay", "name": "Amazing RP Overlay", "group": "amazing", "date": null,
+    "description": { "ru": "Оверлей для Amazing RP.", "en": "An overlay for Amazing RP." },
+    "technologies": [], "repo": "Amazing-RP-Overlay", "role": "solo", "needsReview": true
+  },
+  {
+    "id": "gai-raport-generator", "name": "GAI Report Generator", "group": "amazing", "date": null,
+    "description": { "ru": "Генератор рапортов ГАИ.", "en": "A report generator for GAI." },
+    "technologies": [], "repo": "gai-raport-generator", "role": "solo", "needsReview": true
+  },
+  {
+    "id": "pdn-control", "name": { "ru": "ПДн-контроль", "en": "PDn Control" }, "group": "products", "date": null,
+    "description": { "ru": "Сервис предварительного аудита сайтов: сбор данных, анализ рисков обработки персональных данных и PDF-отчеты.", "en": "A preliminary website audit service with data collection, personal data risk analysis, and PDF reports." },
+    "contribution": { "ru": "Руководство командой и разработка фронтенда: интерфейс запуска проверки, результаты и история аудитов.", "en": "Team leadership and frontend development: the audit submission interface, results, and audit history." },
+    "technologies": ["React", "Vite", "Python", "FastAPI", "Playwright", "Typst", "Docker"], "repo": "pdn-control", "role": "lead-frontend", "client": "Neurolife",
+    "demo": "https://pdn.neurolife.tech"
+  },
+  {
+    "id": "vseinstrumenti-parser", "name": "Vseinstrumenti Parser", "group": "parsers", "date": null,
+    "description": { "ru": "Парсер с API для отслеживания товаров, цен и наличия на vseinstrumenti.ru. История изменений и лента событий.", "en": "A parser and API for tracking products, prices, and availability on vseinstrumenti.ru, with change history and an event feed." },
+    "technologies": ["Python", "FastAPI", "PostgreSQL", "Redis", "SQLAlchemy", "Alembic", "Pydantic", "Docker", "HTTPX"], "repo": "vseinstrumenti-parser", "role": "solo"
+  },
+  {
+    "id": "chess-cli", "name": "Chess CLI", "group": "products", "date": null,
+    "description": { "ru": "Шахматный движок с командным и текстовым интерфейсами.", "en": "A chess game engine with command-line and text-based interfaces." },
+    "technologies": ["C++"], "repo": "chess-cli", "role": "solo"
+  },
+  {
+    "id": "iu-sport-parser", "name": "IU Sport Parser", "group": "parsers", "date": null,
+    "description": { "ru": "Парсер спортивных часов для студентов Университета Иннополис.", "en": "A sports-hours parser for Innopolis University students." },
+    "technologies": ["Python"], "repo": "IU-sport-parser", "role": "solo"
+  },
+  {
+    "id": "l0kus-messenger", "name": "l0kus Messenger", "group": "products", "date": null,
+    "description": { "ru": "Собственный проект мессенджера.", "en": "An independently developed messenger project." },
+    "technologies": [], "repo": "l0kus-messenger", "role": "solo", "needsReview": true
+  },
+  {
+    "id": "ahk-for-gos", "name": "AHK for GOS", "group": "amazing", "date": null,
+    "description": { "ru": "Набор горячих клавиш и скриптов для государственных организаций в Amazing RP.", "en": "Hotkeys and scripts for government organizations in Amazing RP." },
+    "technologies": ["AutoHotkey", "Python"], "repo": "AHK-for-GOS", "role": "solo"
+  },
+  {
+    "id": "osb-raport-generator", "name": "OSB Report Generator", "group": "amazing", "date": null,
+    "description": { "ru": "Генератор рапортов ОСБ.", "en": "A report generator for OSB." },
+    "technologies": [], "repo": "osb-raport-generator", "role": "solo", "needsReview": true
+  },
+  {
+    "id": "osb-bot-web", "name": "OSB Bot · Web", "group": "amazing", "date": null,
+    "description": { "ru": "Веб-проект бота ОСБ.", "en": "An OSB bot web project." },
+    "technologies": [], "repo": "OSB-bot-web", "role": "solo", "needsReview": true
+  },
+  {
+    "id": "se-toolkit-hackathon", "name": "SE Toolkit Hackathon", "group": "university", "date": null,
+    "description": { "ru": "Проект по курсу SE Toolkit в Университете Иннополис.", "en": "A project for the SE Toolkit course at Innopolis University." },
+    "technologies": ["Python"], "repo": "se-toolkit-hackathon", "role": "solo"
+  },
+  {
+    "id": "osb-vk-bot-miniapp", "name": "OSB VK Bot Mini App", "group": "amazing", "date": null,
+    "description": { "ru": "Мини-приложение для бота ОСБ во ВКонтакте.", "en": "A VK mini app for the OSB bot." },
+    "technologies": [], "repo": "osb-VK-bot-miniapp", "role": "solo", "needsReview": true
+  },
+  {
+    "id": "zakonka-silver-web", "name": "Zakonka Silver", "group": "amazing", "date": null,
+    "description": { "ru": "Веб-проект Zakonka Silver.", "en": "The Zakonka Silver web project." },
+    "technologies": [], "repo": "zakonka-silver-web", "role": "solo", "needsReview": true
+  },
+  {
+    "id": "parser", "name": { "ru": "Новостной парсер", "en": "News Parser" }, "group": "parsers", "date": null,
+    "description": { "ru": "Сбор новостей из нескольких источников для проекта «Сириус ИИ». Фильтрация по ключевым словам и сохранение статей.", "en": "News collection from multiple sources for the Sirius AI project, with keyword filtering and article export." },
+    "technologies": ["Python", "Requests", "BeautifulSoup"], "repo": "parser", "role": "solo"
+  }
+]

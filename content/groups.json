@@ -1,0 +1,6 @@
+[
+  { "id": "products", "name": { "ru": "Продукты и инструменты", "en": "Products & tools" }, "description": { "ru": "Приложения и сервисы для практических задач.", "en": "Applications and services for everyday problems." } },
+  { "id": "parsers", "name": { "ru": "Парсеры и данные", "en": "Parsers & data" }, "description": { "ru": "Сбор, обработка и отслеживание информации.", "en": "Collecting, processing, and tracking information." } },
+  { "id": "university", "name": { "ru": "Учебные проекты", "en": "University projects" }, "description": { "ru": "Проекты из университетской практики.", "en": "Projects from university coursework." } },
+  { "id": "amazing", "name": { "ru": "Amazing", "en": "Amazing" }, "description": { "ru": "Инструменты и автоматизация для Amazing RP.", "en": "Tools and automation for Amazing RP." } }
+]

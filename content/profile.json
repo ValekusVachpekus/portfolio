@@ -1,0 +1,21 @@
+{
+  "name": { "ru": "Илья Щетков", "en": "Ilia Shchetkov" },
+  "firstName": { "ru": "Илья", "en": "Ilia" },
+  "lastName": { "ru": "Щетков", "en": "Shchetkov" },
+  "title": { "ru": "Разработчик", "en": "Software developer" },
+  "education": { "ru": "Студент Университета Иннополис", "en": "Innopolis University student" },
+  "intro": {
+    "ru": "Разрабатываю приложения, веб-сервисы и инструменты автоматизации. От идеи и интерфейса — до работающего продукта.",
+    "en": "I build applications, web services, and automation tools. From the idea and interface to a working product."
+  },
+  "about": {
+    "ru": "Учусь в Университете Иннополис. Работаю с веб-интерфейсами, системными приложениями и обработкой данных. Большинство проектов разрабатываю самостоятельно; в «ПДн-контроль» для Neurolife отвечаю за руководство командой и фронтенд.",
+    "en": "I study at Innopolis University and work on web interfaces, desktop applications, and data processing. I develop most projects independently. For Neurolife’s PDn Control, my roles are Team Lead and Frontend Developer."
+  },
+  "github": "https://github.com/ValekusVachpekus",
+  "telegram": "https://t.me/l0kuz",
+  "email": "i.shchetkov@innopolis.university",
+  "featuredProjects": ["diskclean", "pdn-control", "chess-cli"],
+  "skills": ["Rust", "Python", "C++", "React", "Vite", "FastAPI", "PostgreSQL", "Redis", "SQLAlchemy", "Alembic", "Pydantic", "Docker", "egui", "Rayon", "Serde", "AutoHotkey", "Git"],
+  "source": "https://github.com/ValekusVachpekus"
+}
