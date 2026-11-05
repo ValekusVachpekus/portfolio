@@ -1,5 +1,10 @@
 [
   {
+    "id": "mediaharbor", "name": "MediaHarbor", "group": "products", "date": null,
+    "description": { "ru": "Настольное приложение и расширение браузера для скачивания видео и музыки, поиска треков и сжатия медиафайлов.", "en": "A desktop app and browser extension for downloading video and music, finding tracks, and compressing media files." },
+    "technologies": ["Rust", "Tauri", "React", "TypeScript"], "repo": "mediaharbor", "role": "solo"
+  },
+  {
     "id": "diskclean", "name": "Diskclean", "group": "products", "date": null,
     "description": { "ru": "Анализатор дискового пространства для Linux и Windows. Визуализация занятого места, поиск дубликатов и безопасная очистка.", "en": "A disk usage analyzer for Linux and Windows with storage visualization, duplicate detection, and safe cleanup." },
     "contribution": { "ru": "Самостоятельная разработка CLI, графического интерфейса и логики анализа и очистки.", "en": "Independent development of the CLI, graphical interface, analysis, and cleanup logic." },
@@ -18,8 +23,8 @@
   },
   {
     "id": "amazing-rp-overlay", "name": "Amazing RP Overlay", "group": "amazing", "date": null,
-    "description": { "ru": "Оверлей для Amazing RP.", "en": "An overlay for Amazing RP." },
-    "technologies": [], "repo": "Amazing-RP-Overlay", "role": "solo", "needsReview": true
+    "description": { "ru": "Внутриигровой DLL/ASI-клиент и внешний оверлей для Amazing RP: парсинг законов форума, поиск по базе и ИИ-ответы с источниками на основе RAG.", "en": "An in-game DLL/ASI client and external overlay for Amazing RP, with forum law parsing, database search, and RAG-based AI answers with sources." },
+    "technologies": ["Python", "C++", "PySide6", "ImGui", "Direct3D 9", "SQLite FTS5", "Playwright", "RAG"], "repo": "Amazing-RP-Overlay", "role": "solo"
   },
   {
     "id": "gai-raport-generator", "name": "GAI Report Generator", "group": "amazing", "date": null,

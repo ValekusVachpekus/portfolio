@@ -1,0 +1,25 @@
+[
+  {
+    "year": "2026", "title": { "ru": "Team Lead и Frontend-разработчик", "en": "Team Lead and Frontend Developer" },
+    "organization": { "ru": "ПДн-контроль · Neurolife", "en": "PDn Control · Neurolife" },
+    "description": { "ru": "Руководил командой и общался с заказчиком; разработал дизайн и интерфейс сервиса проверки сайтов на риски нарушения 152-ФЗ на React и Vite.", "en": "Led the team and communicated with the client; designed and built the React and Vite interface for a service that checks websites for risks related to Russian Federal Law 152-FZ." },
+    "project": "pdn-control"
+  },
+  {
+    "year": "2025", "title": { "ru": "ML-инженер", "en": "ML Engineer" },
+    "organization": { "ru": "Помощник для автора VK · Сириус ИИ", "en": "VK Author Assistant · Sirius AI" },
+    "description": { "ru": "Настроил локальные ИИ-модели для подключения к VK Mini App и разработал парсер новостей для более чем 20 сайтов на Python и Beautiful Soup.", "en": "Configured local AI models for integration with a VK Mini App and built a news parser for more than 20 websites using Python and Beautiful Soup." },
+    "project": "parser"
+  },
+  {
+    "year": "2025", "title": { "ru": "3D-инженер · проект", "en": "3D Engineer · project" },
+    "organization": { "ru": "АО «КОНАР»", "en": "KONAR JSC" },
+    "description": { "ru": "Разработал и протестировал 3D-модель рабочего колеса с частично закрытыми полостями в КОМПАС-3D и LVMflow.", "en": "Designed and tested a 3D model of an impeller with partially enclosed cavities using KOMPAS-3D and LVMflow." }
+  },
+  {
+    "year": "2023", "title": { "ru": "Frontend-разработчик", "en": "Frontend Developer" },
+    "organization": { "ru": "ПКП «Дельта Инжиниринг»", "en": "PKP Delta Engineering" },
+    "description": { "ru": "Поддерживал сайт компании и адаптировал его для мобильных устройств с использованием HTML, CSS и Bootstrap.", "en": "Maintained the company website and adapted it for mobile devices using HTML, CSS, and Bootstrap." },
+    "url": "https://www.pkpdelta.ru"
+  }
+]

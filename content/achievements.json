@@ -1,1 +1,11 @@
-[]
+[
+  {
+    "id": "honeybadger-ctf-2026",
+    "title": { "ru": "HoneyBadger CTF AvitoTech 2026", "en": "HoneyBadger CTF AvitoTech 2026" },
+    "issuer": { "ru": "AvitoTech", "en": "AvitoTech" },
+    "date": "2026-07-19",
+    "description": { "ru": "40-я строчка до дисквалификаций в лиге Honey League в составе команды SUCore.", "en": "40th place before disqualifications in the Honey League as part of team SUCore." },
+    "file": "documents/honeybadger-ctf-2026.pdf",
+    "preview": "documents/honeybadger-ctf-2026.jpg"
+  }
+]

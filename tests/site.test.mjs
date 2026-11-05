@@ -14,25 +14,25 @@ assert.equal(result.status, 0, result.stderr);
 const content = async name => JSON.parse(await readFile(join(root, 'content', `${name}.json`), 'utf8'));
 const projects = await content('projects');
 const groups = await content('groups');
-const pages = ['index.html', 'projects.html', 'achievements.html', 'en/index.html', 'en/projects.html', 'en/achievements.html'];
+const pages = ['index.html', 'projects.html', 'experience.html', 'education.html', 'achievements.html', 'en/index.html', 'en/projects.html', 'en/experience.html', 'en/education.html', 'en/achievements.html'];
 
-test('homepage showcases Diskclean, PDn Control, and Chess CLI without Amazing projects in both languages', async () => {
+test('homepage showcases selected projects without Amazing projects in both languages', async () => {
   for (const page of ['index.html', 'en/index.html']) {
     const html = await readFile(join(root, 'dist', page), 'utf8');
     const ids = [...html.matchAll(/class="project-row compact" id="([^"]+)"/g)].map(match => match[1]);
-    assert.deepEqual(ids, ['diskclean', 'pdn-control', 'chess-cli']);
+    assert.deepEqual(ids, ['mediaharbor', 'diskclean', 'pdn-control', 'chess-cli']);
     assert.ok(ids.every(id => projects.find(project => project.id === id).group !== 'amazing'));
   }
 });
 
-test('all 17 selected repositories appear exactly once in each project page', async () => {
-  assert.equal(projects.length, 17);
-  assert.equal(new Set(projects.map(p => p.id)).size, 17);
+test('all selected repositories appear exactly once in each project page', async () => {
+  assert.equal(projects.length, 18);
+  assert.equal(new Set(projects.map(p => p.id)).size, projects.length);
   assert.equal(projects.filter(p => p.role !== 'solo').length, 1);
   assert.equal(projects.find(p => p.repo === 'pdn-control').client, 'Neurolife');
   for (const page of ['projects.html', 'en/projects.html']) {
     const html = await readFile(join(root, 'dist', page), 'utf8');
-    assert.equal((html.match(/data-project /g) ?? []).length, 17);
+    assert.equal((html.match(/data-project /g) ?? []).length, projects.length);
     for (const p of projects) assert.equal((html.match(new RegExp(`id="${p.id}"`, 'g')) ?? []).length, 1);
   }
 });
@@ -59,6 +59,18 @@ test('Russian and English pages preserve language, current page, and reciprocal 
     assert.ok(html.includes(`class="language-switch" href="${other}"`));
   }
 });
+test('experience and education are available in both languages with project links', async () => {
+  for (const [prefix, organizations, schools] of [
+    ['', ['Neurolife', 'Сириус ИИ', 'КОНАР', 'Дельта Инжиниринг'], ['Университет Иннополис', 'Яндекс Лицей']],
+    ['en/', ['Neurolife', 'Sirius AI', 'KONAR', 'Delta Engineering'], ['Innopolis University', 'Yandex Lyceum']],
+  ]) {
+    const work = await readFile(join(root, 'dist', prefix, 'experience.html'), 'utf8');
+    const study = await readFile(join(root, 'dist', prefix, 'education.html'), 'utf8');
+    for (const name of organizations) assert.ok(work.includes(name));
+    for (const name of schools) assert.ok(study.includes(name));
+    for (const id of ['pdn-control', 'parser']) assert.ok(work.includes(`projects.html#${id}`));
+  }
+});
 test('release overrides, missing dates, and stable chronological ordering', () => {
   const a = { repo: 'a', date: '2025-10-01' };
   const b = { repo: 'b', date: '2026-02-01' };
@@ -75,12 +87,12 @@ test('Amazing remains last regardless of dates; other groups sort by latest proj
   assert.equal(ordered[0].id, 'parsers');
   assert.equal(ordered.at(-1).id, 'amazing');
 });
-test('no invented achievements and a usable empty state in both languages', async () => {
-  assert.deepEqual(await content('achievements'), []);
+test('the certificate appears in both languages', async () => {
+  assert.equal((await content('achievements'))[0].id, 'honeybadger-ctf-2026');
   for (const page of ['achievements.html', 'en/achievements.html']) {
     const html = await readFile(join(root, 'dist', page), 'utf8');
-    assert.ok(html.includes('class="empty-state"'));
-    assert.ok(!html.includes('class="achievement"'));
+    assert.ok(html.includes('HoneyBadger CTF AvitoTech 2026'));
+    assert.ok(html.includes('honeybadger-ctf-2026.pdf'));
   }
 });
 test('document paths and external URLs cannot execute scripts or escape assets', () => {

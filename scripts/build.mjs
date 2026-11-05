@@ -5,7 +5,7 @@ import { languages, localize, escapeHtml as e, projectDate, sortedProjects, orde
 
 const root = fileURLToPath(new URL('../', import.meta.url));
 const read = async file => JSON.parse(await readFile(join(root, 'content', file), 'utf8'));
-const [profile, projects, groups, achievements] = await Promise.all(['profile.json', 'projects.json', 'groups.json', 'achievements.json'].map(read));
+const [profile, projects, groups, achievements, experience, education] = await Promise.all(['profile.json', 'projects.json', 'groups.json', 'achievements.json', 'experience.json', 'education.json'].map(read));
 let metadata = {};
 try { metadata = await read('github.json'); } catch (error) { if (error.code !== 'ENOENT') throw error; }
 const output = join(root, 'dist');
@@ -31,11 +31,11 @@ for (const item of achievements) {
 }
 const text = {
   ru: {
-    home: 'Главная', projects: 'Проекты', achievements: 'Достижения', contact: 'Связаться', skip: 'Перейти к содержимому',
+    home: 'Главная', projects: 'Проекты', experience: 'Опыт работы', achievements: 'Достижения', contact: 'Связаться', skip: 'Перейти к содержимому',
     portfolio: 'Портфолио разработчика', selected: 'Избранные проекты', all: 'Все проекты', about: 'Обо мне',
     aboutTitle: 'Идея. Код. Результат.', skills: 'Технологии в проектах', education: 'Образование', focus: 'Направления',
     focusValue: 'Приложения / Веб / Автоматизация', based: 'Университет Иннополис', github: 'Код на GitHub',
-    projectsIntro: 'Приложения, инструменты и эксперименты. Самостоятельные проекты и командная работа.',
+    projectsIntro: 'Приложения, инструменты и эксперименты. Самостоятельные проекты и командная работа.', experienceIntro: 'Работа и проектный опыт в разработке, машинном обучении и инженерии.', educationIntro: 'Университетское образование и дополнительное обучение.', projectLink: 'Подробнее о проекте', website: 'Сайт компании',
     achievementsIntro: 'Дипломы, сертификаты и другие результаты за пределами репозиториев.',
     count: 'В репозиториях', solo: 'Самостоятельная разработка', lead: 'Team Lead · Frontend', client: 'Заказчик',
     role: 'Роль и вклад', code: 'Исходный код', demo: 'Открыть сервис', release: 'Релиз', created: 'Создан',
@@ -47,11 +47,11 @@ const text = {
     footer: 'Приложения, веб-сервисы и автоматизация.', index: 'Индекс проектов', section: 'Раздел',
   },
   en: {
-    home: 'About', projects: 'Projects', achievements: 'Achievements', contact: 'Get in touch', skip: 'Skip to content',
+    home: 'About', projects: 'Projects', experience: 'Experience', achievements: 'Achievements', contact: 'Get in touch', skip: 'Skip to content',
     portfolio: 'Developer portfolio', selected: 'Selected projects', all: 'All projects', about: 'About me',
     aboutTitle: 'Idea. Code. Outcome.', skills: 'Technologies in my projects', education: 'Education', focus: 'Focus',
     focusValue: 'Applications / Web / Automation', based: 'Innopolis University', github: 'Code on GitHub',
-    projectsIntro: 'Applications, tools, and experiments. Independent projects and collaborative work.',
+    projectsIntro: 'Applications, tools, and experiments. Independent projects and collaborative work.', experienceIntro: 'Work and project experience in software, machine learning, and engineering.', educationIntro: 'University studies and additional training.', projectLink: 'View project', website: 'Company website',
     achievementsIntro: 'Diplomas, certificates, and milestones beyond the repositories.',
     count: 'Repositories', solo: 'Independent developer', lead: 'Team Lead · Frontend', client: 'Client',
     role: 'Role & contribution', code: 'Source code', demo: 'Visit service', release: 'Released', created: 'Created',
@@ -119,6 +119,12 @@ function projectPage(lang) {
   <div class="no-results" data-no-results hidden><p>${t.noResults}</p><button class="text-link" type="button" data-clear-search>${t.reset} ↗</button></div>`;
 }
 
+function historyPage(lang, page, items) {
+  const t = text[lang];
+  return `<header class="page-heading"><p class="eyebrow">${t[page]}</p><h1>${t[page]}<span class="heading-dot">.</span></h1><p class="page-intro">${t[`${page}Intro`]}</p></header>
+  <div class="history-list">${items.map(item => `<article class="history-entry"><p class="history-year">${e(item.year)}</p><div><p class="history-organization">${e(localize(item.organization, lang))}</p><h2>${e(localize(item.title, lang))}</h2><p class="history-description">${e(localize(item.description, lang))}</p>${item.project ? `<a class="text-link" href="projects.html#${e(item.project)}">${t.projectLink} ${arrow}</a>` : item.url ? external(item.url, t.website, 'text-link') : ''}</div></article>`).join('')}</div>`;
+}
+
 function achievementsPage(lang) {
   const t = text[lang];
   const prefix = lang === 'en' ? '../' : '';
@@ -142,7 +148,7 @@ function shell(content, lang, page) {
   const title = `${page === 'home' ? localize(profile.title, lang) : t[page] ?? t.missing} — ${name}`;
   return `<!doctype html>
 <html lang="${lang}"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="color-scheme" content="light"><title>${e(title)}</title><meta name="description" content="${e(localize(profile.intro, lang))}"><meta property="og:title" content="${e(title)}"><meta property="og:description" content="${e(localize(profile.intro, lang))}"><meta property="og:type" content="website"><meta property="og:locale" content="${lang === 'ru' ? 'ru_RU' : 'en_US'}"><meta name="theme-color" content="#f7f7f2"><link rel="icon" href="${prefix}assets/favicon.svg" type="image/svg+xml"><link rel="stylesheet" href="${prefix}assets/style.css"><link rel="alternate" hreflang="${other}" href="${alternate}"><script src="${prefix}assets/app.js" defer></script></head>
-<body data-page="${page}"><a class="skip-link" href="#main">${t.skip}</a><div class="site-shell"><header class="site-header"><a class="brand" href="index.html" aria-label="${e(name)} — ${t.home}">is<span>.</span></a><nav class="main-nav" aria-label="${lang === 'ru' ? 'Основная навигация' : 'Main navigation'}">${['home', 'projects', 'achievements'].map(key => `<a href="${pageFile(key)}" ${page === key ? 'aria-current="page"' : ''}>${t[key]}</a>`).join('')}</nav><div class="header-end"><a class="language-switch" href="${alternate}" lang="${other}" hreflang="${other}" aria-label="${other === 'en' ? 'Switch to English' : 'Переключить на русский'}">${other.toUpperCase()}</a><a class="header-contact" href="#contact">${t.contact} ${arrow}</a></div></header>
+<body data-page="${page}"><a class="skip-link" href="#main">${t.skip}</a><div class="site-shell"><header class="site-header"><a class="brand" href="index.html" aria-label="${e(name)} — ${t.home}">is<span>.</span></a><nav class="main-nav" aria-label="${lang === 'ru' ? 'Основная навигация' : 'Main navigation'}">${['home', 'projects', 'experience', 'education', 'achievements'].map(key => `<a href="${pageFile(key)}" ${page === key ? 'aria-current="page"' : ''}>${t[key]}</a>`).join('')}</nav><div class="header-end"><a class="language-switch" href="${alternate}" lang="${other}" hreflang="${other}" aria-label="${other === 'en' ? 'Switch to English' : 'Переключить на русский'}">${other.toUpperCase()}</a><a class="header-contact" href="#contact">${t.contact} ${arrow}</a></div></header>
 <main id="main">${content}</main>
 <section class="contact-section" id="contact" aria-labelledby="contact-title"><div><p class="section-marker">03 / ${t.contact}</p><h2 id="contact-title">${t.write}</h2><p>${t.writeText}</p></div><div class="contact-links"><a class="contact-email" href="mailto:${e(profile.email)}">${e(profile.email)} ${arrow}</a><div>${external(profile.telegram, 'Telegram')}${external(profile.github, 'GitHub')}</div></div></section>
 <footer class="site-footer"><span>© ${new Date().getUTCFullYear()} ${e(name)}</span><span>${t.footer}</span><a href="#main" aria-label="${lang === 'ru' ? 'Наверх' : 'Back to top'}">↑</a></footer></div></body></html>`;
@@ -153,7 +159,7 @@ await mkdir(join(output, 'en'), { recursive: true });
 await cp(join(root, 'assets'), join(output, 'assets'), { recursive: true });
 await cp(join(root, 'public'), output, { recursive: true });
 for (const lang of languages) {
-  for (const [page, render] of Object.entries({ home, projects: projectPage, achievements: achievementsPage })) {
+  for (const [page, render] of Object.entries({ home, projects: projectPage, experience: lang => historyPage(lang, 'experience', experience), education: lang => historyPage(lang, 'education', education), achievements: achievementsPage })) {
     const target = join(output, lang === 'en' ? 'en' : '', pageFile(page));
     await mkdir(dirname(target), { recursive: true });
     await writeFile(target, shell(render(lang), lang, page));
@@ -166,4 +172,4 @@ base = '/' + base.split('/').filter(Boolean).join('/') + (base === '/' ? '' : '/
 const notFoundPath = join(output, '404.html');
 await writeFile(notFoundPath, (await readFile(notFoundPath, 'utf8')).replace('<head>', `<head><base href="${e(base)}">`));
 await writeFile(join(output, '.nojekyll'), '');
-console.log(`Built 6 pages + 404 in ${output}`);
+console.log(`Built 10 pages + 404 in ${output}`);

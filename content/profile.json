@@ -15,7 +15,7 @@
   "github": "https://github.com/ValekusVachpekus",
   "telegram": "https://t.me/l0kuz",
   "email": "i.shchetkov@innopolis.university",
-  "featuredProjects": ["diskclean", "pdn-control", "chess-cli"],
+  "featuredProjects": ["mediaharbor", "diskclean", "pdn-control", "chess-cli"],
   "skills": ["Rust", "Python", "C++", "React", "Vite", "FastAPI", "PostgreSQL", "Redis", "SQLAlchemy", "Alembic", "Pydantic", "Docker", "egui", "Rayon", "Serde", "AutoHotkey", "Git"],
   "source": "https://github.com/ValekusVachpekus"
 }

@@ -1,0 +1,12 @@
+[
+  {
+    "year": "2025–2029", "title": { "ru": "Анализ данных и искусственный интеллект", "en": "Data Science and Artificial Intelligence" },
+    "organization": { "ru": "Университет Иннополис", "en": "Innopolis University" },
+    "description": { "ru": "GPA: 4,75 из 5. Ключевые курсы: Software System Analysis and Design, Introduction to AI, Operating Systems, высшая математика.", "en": "GPA: 4.75 out of 5. Key courses: Software System Analysis and Design, Introduction to AI, Operating Systems, higher mathematics." }
+  },
+  {
+    "year": "2025", "title": { "ru": "Курс по машинному обучению", "en": "Machine Learning Course" },
+    "organization": { "ru": "Яндекс Лицей", "en": "Yandex Lyceum" },
+    "description": { "ru": "Изучение Keras, TensorFlow, matplotlib и основ высшей математики для машинного обучения.", "en": "Studied Keras, TensorFlow, matplotlib, and higher mathematics for machine learning." }
+  }
+]
