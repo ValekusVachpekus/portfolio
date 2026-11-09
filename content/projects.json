@@ -77,7 +77,7 @@
     "id": "se-toolkit-hackathon", "name": "Housing Utilities Assistant", "group": "university", "date": null,
     "description": { "ru": "Telegram-бот и веб-сайт для подачи жалоб в ЖКХ: админ-панель, дашборд и уведомления через бота. Проект SE Toolkit Hackathon.", "en": "A Telegram bot and website for submitting housing and utilities complaints, with an admin panel, dashboard, and bot notifications. Built for the SE Toolkit Hackathon." },
     "contribution": { "ru": "Разработал проект в одиночку: Telegram-бота, веб-сайт, админ-панель, дашборд и уведомления.", "en": "Built the entire project independently: the Telegram bot, website, admin panel, dashboard, and notifications." },
-    "technologies": ["Python"], "repo": "se-toolkit-hackathon", "role": "solo", "video": "videos/housing-utilities-assistant.mp4"
+    "technologies": ["Python"], "repo": "se-toolkit-hackathon", "role": "solo"
   },
   {
     "id": "osb-vk-bot-miniapp", "name": "OSB VK Bot Mini App", "group": "amazing", "date": null,
