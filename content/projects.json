@@ -32,11 +32,11 @@
     "technologies": [], "repo": "gai-raport-generator", "role": "solo", "needsReview": true
   },
   {
-    "id": "pdn-control", "name": { "ru": "ПДн-контроль", "en": "PDn Control" }, "group": "products", "date": null,
+    "id": "pdn-control", "name": { "ru": "ПДн-Контроль", "en": "PDn Control" }, "group": "products", "date": null,
     "description": { "ru": "Сервис предварительного аудита сайтов: сбор данных, анализ рисков обработки персональных данных и PDF-отчеты.", "en": "A preliminary website audit service with data collection, personal data risk analysis, and PDF reports." },
     "contribution": { "ru": "Руководство командой и разработка фронтенда: интерфейс запуска проверки, результаты и история аудитов.", "en": "Team leadership and frontend development: the audit submission interface, results, and audit history." },
     "technologies": ["React", "Vite", "Python", "FastAPI", "Playwright", "Typst", "Docker"], "repo": "pdn-control", "role": "lead-frontend", "client": "Neurolife",
-    "demo": "https://pdn.neurolife.tech"
+    "demo": "https://pdn.neurolife.tech", "video": "https://disk.yandex.ru/i/A57fbswv34qP6g"
   },
   {
     "id": "vseinstrumenti-parser", "name": "Vseinstrumenti Parser", "group": "parsers", "date": null,
@@ -74,9 +74,10 @@
     "technologies": [], "repo": "OSB-bot-web", "role": "solo", "needsReview": true
   },
   {
-    "id": "se-toolkit-hackathon", "name": "SE Toolkit Hackathon", "group": "university", "date": null,
-    "description": { "ru": "Проект по курсу SE Toolkit в Университете Иннополис.", "en": "A project for the SE Toolkit course at Innopolis University." },
-    "technologies": ["Python"], "repo": "se-toolkit-hackathon", "role": "solo"
+    "id": "se-toolkit-hackathon", "name": "Housing Utilities Assistant", "group": "university", "date": null,
+    "description": { "ru": "Telegram-бот и веб-сайт для подачи жалоб в ЖКХ: админ-панель, дашборд и уведомления через бота. Проект SE Toolkit Hackathon.", "en": "A Telegram bot and website for submitting housing and utilities complaints, with an admin panel, dashboard, and bot notifications. Built for the SE Toolkit Hackathon." },
+    "contribution": { "ru": "Разработал проект в одиночку: Telegram-бота, веб-сайт, админ-панель, дашборд и уведомления.", "en": "Built the entire project independently: the Telegram bot, website, admin panel, dashboard, and notifications." },
+    "technologies": ["Python"], "repo": "se-toolkit-hackathon", "role": "solo", "video": "videos/housing-utilities-assistant.mp4"
   },
   {
     "id": "osb-vk-bot-miniapp", "name": "OSB VK Bot Mini App", "group": "amazing", "date": null,

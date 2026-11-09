@@ -10,6 +10,12 @@ let metadata = {};
 try { metadata = await read('github.json'); } catch (error) { if (error.code !== 'ENOENT') throw error; }
 const output = join(root, 'dist');
 const sorted = sortedProjects(projects, metadata);
+for (const project of projects) {
+  if (project.video?.startsWith('videos/')) {
+    safeUrl(project.video, { local: true });
+    await access(join(root, 'public', project.video));
+  } else if (project.video) safeUrl(project.video);
+}
 const featured = profile.featuredProjects.map(id => {
   const project = projects.find(project => project.id === id);
   if (!project) throw new Error(`Unknown featured project: ${id}`);
@@ -31,14 +37,21 @@ for (const item of achievements) {
 }
 const text = {
   ru: {
-    home: 'Главная', projects: 'Проекты', experience: 'Опыт работы', achievements: 'Достижения', contact: 'Связаться', skip: 'Перейти к содержимому',
+    home: 'Главная', projects: 'Проекты', services: 'Услуги', experience: 'Опыт работы', achievements: 'Достижения', contact: 'Связаться', skip: 'Перейти к содержимому',
+    priceNote: 'Итоговая цена договорная и может быть как выше, так и ниже указанной — в зависимости от задачи. Остальные услуги — по договорённости.',
+    serviceItems: [
+      { icon: 'telegram', name: 'Telegram-боты', description: 'Python, Telegram API — приём заявок и уведомления для клиентов и команды.', price: 'от 5 000 ₽' },
+      { icon: 'code', name: 'Python и автоматизация', description: 'HTTPX, Playwright — сбор данных с сайтов и автоматизация рутинных задач.', price: 'от 3 000 ₽' },
+      { icon: 'globe', name: 'Веб-разработка', description: 'React, FastAPI — веб-сервисы, личные кабинеты и панели управления.', price: 'от 10 000 ₽' },
+      { icon: 'ai', name: 'ИИ-интеграции', description: 'LLM API, RAG — ответы по вашим документам и обработка обращений.', price: 'По оценке ТЗ' },
+    ],
     portfolio: 'Портфолио разработчика', selected: 'Избранные проекты', all: 'Все проекты', about: 'Обо мне',
     aboutTitle: 'Идея. Код. Результат.', skills: 'Технологии в проектах', education: 'Образование', focus: 'Направления',
     focusValue: 'Приложения / Веб / Автоматизация', based: 'Университет Иннополис', github: 'Код на GitHub',
     projectsIntro: 'Приложения, инструменты и эксперименты. Самостоятельные проекты и командная работа.', experienceIntro: 'Работа и проектный опыт в разработке, машинном обучении и инженерии.', educationIntro: 'Университетское образование и дополнительное обучение.', projectLink: 'Подробнее о проекте', website: 'Сайт компании',
     achievementsIntro: 'Дипломы, сертификаты и другие результаты за пределами репозиториев.',
     count: 'В репозиториях', solo: 'Самостоятельная разработка', lead: 'Team Lead · Frontend', client: 'Заказчик',
-    role: 'Роль и вклад', code: 'Исходный код', demo: 'Открыть сервис', release: 'Релиз', created: 'Создан',
+    role: 'Роль и вклад', code: 'Исходный код', demo: 'Открыть сервис', video: 'Видео демонстрации', release: 'Релиз', created: 'Создан',
     noDate: 'Дата не указана', search: 'Найти проект', searchPlaceholder: 'Название, описание или технология',
     noResults: 'По этому запросу ничего не найдено.', reset: 'Сбросить поиск', found: 'Найдено проектов:',
     emptyTitle: 'Достижения — впереди.', emptyText: 'Этот раздел пополнится дипломами, сертификатами и результатами соревнований.',
@@ -47,14 +60,21 @@ const text = {
     footer: 'Приложения, веб-сервисы и автоматизация.', index: 'Индекс проектов', section: 'Раздел',
   },
   en: {
-    home: 'About', projects: 'Projects', experience: 'Experience', achievements: 'Achievements', contact: 'Get in touch', skip: 'Skip to content',
+    home: 'About', projects: 'Projects', services: 'Services', experience: 'Experience', achievements: 'Achievements', contact: 'Get in touch', skip: 'Skip to content',
+    priceNote: 'The final price is agreed individually and may be higher or lower than listed, depending on the task. Other services are available by arrangement.',
+    serviceItems: [
+      { icon: 'telegram', name: 'Telegram bots', description: 'Python, Telegram API — request intake and notifications for clients and teams.', price: 'from ₽5,000' },
+      { icon: 'code', name: 'Python & automation', description: 'HTTPX, Playwright — website data collection and routine task automation.', price: 'from ₽3,000' },
+      { icon: 'globe', name: 'Web development', description: 'React, FastAPI — web services, user accounts, and admin panels.', price: 'from ₽10,000' },
+      { icon: 'ai', name: 'AI integrations', description: 'LLM API, RAG — answers from your documents and customer request processing.', price: 'Quoted individually' },
+    ],
     portfolio: 'Developer portfolio', selected: 'Selected projects', all: 'All projects', about: 'About me',
     aboutTitle: 'Idea. Code. Outcome.', skills: 'Technologies in my projects', education: 'Education', focus: 'Focus',
     focusValue: 'Applications / Web / Automation', based: 'Innopolis University', github: 'Code on GitHub',
     projectsIntro: 'Applications, tools, and experiments. Independent projects and collaborative work.', experienceIntro: 'Work and project experience in software, machine learning, and engineering.', educationIntro: 'University studies and additional training.', projectLink: 'View project', website: 'Company website',
     achievementsIntro: 'Diplomas, certificates, and milestones beyond the repositories.',
     count: 'Repositories', solo: 'Independent developer', lead: 'Team Lead · Frontend', client: 'Client',
-    role: 'Role & contribution', code: 'Source code', demo: 'Visit service', release: 'Released', created: 'Created',
+    role: 'Role & contribution', code: 'Source code', demo: 'Visit service', video: 'Watch demo', release: 'Released', created: 'Created',
     noDate: 'Date not specified', search: 'Find a project', searchPlaceholder: 'Name, description, or technology',
     noResults: 'No projects match your search.', reset: 'Clear search', found: 'Projects found:',
     emptyTitle: 'More milestones to come.', emptyText: 'This section will collect diplomas, certificates, and competition results.',
@@ -65,6 +85,17 @@ const text = {
 };
 const arrow = '<span aria-hidden="true">↗</span>';
 const external = (url, label, cls = '') => `<a class="${cls}" href="${e(safeUrl(url))}" target="_blank" rel="noopener noreferrer">${label} ${arrow}</a>`;
+const icon = name => {
+  const paths = {
+    telegram: '<path d="m21 3-4 18-6-5-4 3 1-6L21 3ZM8 13l9-6M8 13l-5-2L21 3"/>',
+    github: '<path d="M9 19c-4.3 1.3-4.3-2-6-2m12 5v-3.9a3.4 3.4 0 0 0-.9-2.7c3-.3 6.2-1.5 6.2-6.9a5.4 5.4 0 0 0-1.5-3.7 5 5 0 0 0-.1-3.7s-1.2-.4-3.8 1.4a13 13 0 0 0-6.8 0C5.5.7 4.3 1.1 4.3 1.1a5 5 0 0 0-.1 3.7 5.4 5.4 0 0 0-1.5 3.7c0 5.4 3.2 6.6 6.2 6.9a3.4 3.4 0 0 0-.9 2.7V22"/>',
+    code: '<path d="m8 7-5 5 5 5m8-10 5 5-5 5m-3-14-2 18"/>',
+    globe: '<circle cx="12" cy="12" r="9"/><ellipse cx="12" cy="12" rx="4" ry="9"/><path d="M3 12h18"/>',
+    ai: '<path d="M12 18V6a3 3 0 0 0-5.8-1A4 4 0 0 0 4 12a4 4 0 0 0 2 7 3 3 0 0 0 6-1ZM8 9a3 3 0 0 1-3-3m3 9a3 3 0 0 0-3 3M12 8h4l2-3m-6 7h9m-9 4h4l2 3"/><circle cx="19" cy="4" r="1"/><circle cx="22" cy="12" r="1"/><circle cx="19" cy="20" r="1"/>',
+  };
+  return `<svg class="icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${paths[name]}</svg>`;
+};
+const contactButtons = () => `${external(profile.telegram, `${icon('telegram')}<span>Telegram</span>`, 'button contact-button')}${external(profile.github, `${icon('github')}<span>GitHub</span>`, 'button button-outline contact-button')}`;
 const pageFile = page => page === 'home' ? 'index.html' : `${page}.html`;
 
 function dateMarkup(project, lang) {
@@ -87,8 +118,8 @@ function projectRow(project, index, lang, compact = false) {
     </div>
     <div class="project-side"><p class="meta-label">${t.role}</p><p class="project-role">${project.role === 'solo' ? t.solo : t.lead}</p>
       ${project.client ? `<p class="client">${t.client}: ${e(project.client)}</p>` : ''}
-      ${project.contribution && !compact ? `<p class="contribution">${e(localize(project.contribution, lang))}</p>` : ''}
-      <div class="project-links">${external(`https://github.com/ValekusVachpekus/${project.repo}`, t.code)}${project.demo ? external(project.demo, t.demo) : ''}</div>
+      ${project.contribution ? `<p class="contribution">${e(localize(project.contribution, lang))}</p>` : ''}
+      <div class="project-links">${external(`https://github.com/ValekusVachpekus/${project.repo}`, t.code)}${project.demo ? external(project.demo, t.demo) : ''}${project.video ? project.video.startsWith('videos/') ? `<a href="${lang === 'en' ? '../' : ''}${e(safeUrl(project.video, { local: true }))}" target="_blank" rel="noopener noreferrer">${t.video} ${arrow}</a>` : external(project.video, t.video) : ''}</div>
     </div>
   </article>`;
 }
@@ -99,14 +130,18 @@ function home(lang) {
     <div class="hero-copy"><p class="eyebrow"><span class="square" aria-hidden="true"></span> ${t.portfolio}</p>
       <h1 id="hero-title">${e(localize(profile.firstName, lang))}<br><span>${e(localize(profile.lastName, lang))}.</span></h1>
       <p class="hero-title">${e(localize(profile.title, lang))}</p><p class="hero-intro">${e(localize(profile.intro, lang))}</p>
-      <div class="hero-actions"><a class="button" href="projects.html">${t.projects} <span aria-hidden="true">↗</span></a><a class="text-link" href="#contact">${t.contact} <span aria-hidden="true">↗</span></a></div>
+      <div class="hero-actions"><a class="button" href="projects.html">${t.projects} <span aria-hidden="true">↗</span></a>${contactButtons()}</div>
     </div>
     <aside class="hero-aside" aria-label="${t.about}"><div class="monogram" aria-hidden="true"><span class="monogram-top">ILIA / SHCHETKOV</span><span class="monogram-letters">is<span class="monogram-dot">.</span></span><div class="monogram-bottom"><span>SOFTWARE<br>DEVELOPER</span><span>CODE &<br>CRAFT</span></div></div>
       <dl class="hero-facts"><div><dt>${t.education}</dt><dd>${e(localize(profile.education, lang))}</dd></div><div><dt>${t.focus}</dt><dd>${t.focusValue}</dd></div></dl>
     </aside>
   </section>
   <section class="about-section" aria-labelledby="about-title"><p class="section-marker">01 / ${t.about}</p><div><h2 id="about-title">${t.aboutTitle}</h2><p class="about-copy">${e(localize(profile.about, lang))}</p><p class="meta-label">${t.skills}</p><ul class="skills-list">${profile.skills.map(skill => `<li>${e(skill)}</li>`).join('')}</ul></div></section>
-  <section class="selected-section" aria-labelledby="selected-title"><div class="section-heading"><div><p class="section-marker">02 / ${t.projects}</p><h2 id="selected-title">${t.selected}<span class="heading-dot">.</span></h2></div><a class="text-link" href="projects.html">${t.all} <span aria-hidden="true">↗</span></a></div>${featured.map((p, i) => projectRow(p, i, lang, true)).join('')}</section>`;
+  <section class="selected-section" aria-labelledby="selected-title"><div class="section-heading"><div><p class="section-marker">02 / ${t.projects}</p><h2 id="selected-title">${t.selected}<span class="heading-dot">.</span></h2></div><a class="text-link" href="projects.html">${t.all} <span aria-hidden="true">↗</span></a></div>${featured.map((p, i) => projectRow(p, i, lang, true)).join('')}</section>
+  <section class="services-section" id="services" aria-labelledby="services-title"><div class="section-heading"><div><p class="section-marker">03 / ${t.services}</p><h2 id="services-title">${t.services}<span class="heading-dot">.</span></h2></div></div>
+    <div class="services-grid">${t.serviceItems.map(item => `<article class="service-card">${icon(item.icon)}<h3>${e(item.name)}</h3><p class="service-description">${e(item.description)}</p><p class="service-price">${e(item.price)}</p></article>`).join('')}</div>
+    <p class="services-note">${t.priceNote}</p>
+  </section>`;
 }
 
 function projectPage(lang) {
@@ -150,7 +185,7 @@ function shell(content, lang, page) {
 <html lang="${lang}"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="color-scheme" content="light"><title>${e(title)}</title><meta name="description" content="${e(localize(profile.intro, lang))}"><meta property="og:title" content="${e(title)}"><meta property="og:description" content="${e(localize(profile.intro, lang))}"><meta property="og:type" content="website"><meta property="og:locale" content="${lang === 'ru' ? 'ru_RU' : 'en_US'}"><meta name="theme-color" content="#f7f7f2"><link rel="icon" href="${prefix}assets/favicon.svg" type="image/svg+xml"><link rel="stylesheet" href="${prefix}assets/style.css"><link rel="alternate" hreflang="${other}" href="${alternate}"><script src="${prefix}assets/app.js" defer></script></head>
 <body data-page="${page}"><a class="skip-link" href="#main">${t.skip}</a><div class="site-shell"><header class="site-header"><a class="brand" href="index.html" aria-label="${e(name)} — ${t.home}">is<span>.</span></a><nav class="main-nav" aria-label="${lang === 'ru' ? 'Основная навигация' : 'Main navigation'}">${['home', 'projects', 'experience', 'education', 'achievements'].map(key => `<a href="${pageFile(key)}" ${page === key ? 'aria-current="page"' : ''}>${t[key]}</a>`).join('')}</nav><div class="header-end"><a class="language-switch" href="${alternate}" lang="${other}" hreflang="${other}" aria-label="${other === 'en' ? 'Switch to English' : 'Переключить на русский'}">${other.toUpperCase()}</a><a class="header-contact" href="#contact">${t.contact} ${arrow}</a></div></header>
 <main id="main">${content}</main>
-<section class="contact-section" id="contact" aria-labelledby="contact-title"><div><p class="section-marker">03 / ${t.contact}</p><h2 id="contact-title">${t.write}</h2><p>${t.writeText}</p></div><div class="contact-links"><a class="contact-email" href="mailto:${e(profile.email)}">${e(profile.email)} ${arrow}</a><div>${external(profile.telegram, 'Telegram')}${external(profile.github, 'GitHub')}</div></div></section>
+<section class="contact-section" id="contact" aria-labelledby="contact-title"><div><p class="section-marker">${page === 'home' ? '04' : '03'} / ${t.contact}</p><h2 id="contact-title">${t.write}</h2><p>${t.writeText}</p></div><div class="contact-links"><a class="contact-email" href="mailto:${e(profile.email)}">${e(profile.email)} ${arrow}</a><div>${contactButtons()}</div></div></section>
 <footer class="site-footer"><span>© ${new Date().getUTCFullYear()} ${e(name)}</span><span>${t.footer}</span><a href="#main" aria-label="${lang === 'ru' ? 'Наверх' : 'Back to top'}">↑</a></footer></div></body></html>`;
 }
 

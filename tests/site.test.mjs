@@ -20,7 +20,7 @@ test('homepage showcases selected projects without Amazing projects in both lang
   for (const page of ['index.html', 'en/index.html']) {
     const html = await readFile(join(root, 'dist', page), 'utf8');
     const ids = [...html.matchAll(/class="project-row compact" id="([^"]+)"/g)].map(match => match[1]);
-    assert.deepEqual(ids, ['mediaharbor', 'diskclean', 'pdn-control', 'chess-cli']);
+    assert.deepEqual(ids, ['pdn-control', 'se-toolkit-hackathon', 'iu-sport-parser', 'mediaharbor', 'diskclean']);
     assert.ok(ids.every(id => projects.find(project => project.id === id).group !== 'amazing'));
   }
 });

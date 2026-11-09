@@ -2,11 +2,11 @@
   "name": { "ru": "Илья Щетков", "en": "Ilia Shchetkov" },
   "firstName": { "ru": "Илья", "en": "Ilia" },
   "lastName": { "ru": "Щетков", "en": "Shchetkov" },
-  "title": { "ru": "Разработчик", "en": "Software developer" },
+  "title": { "ru": "Разрабатываю веб-сервисы и автоматизирую бизнес-процессы", "en": "I build web services and automate business processes" },
   "education": { "ru": "Студент Университета Иннополис", "en": "Innopolis University student" },
   "intro": {
-    "ru": "Разрабатываю приложения, веб-сервисы и инструменты автоматизации. От идеи и интерфейса — до работающего продукта.",
-    "en": "I build applications, web services, and automation tools. From the idea and interface to a working product."
+    "ru": "Telegram-боты, Python-скрипты, API-интеграции и полноценные веб-приложения. От идеи до готового работающего решения.",
+    "en": "Telegram bots, Python scripts, API integrations, and complete web applications. From an idea to a working solution."
   },
   "about": {
     "ru": "Учусь в Университете Иннополис. Работаю с веб-интерфейсами, системными приложениями и обработкой данных. Большинство проектов разрабатываю самостоятельно; в «ПДн-контроль» для Neurolife отвечаю за руководство командой и фронтенд.",
@@ -15,7 +15,7 @@
   "github": "https://github.com/ValekusVachpekus",
   "telegram": "https://t.me/l0kuz",
   "email": "i.shchetkov@innopolis.university",
-  "featuredProjects": ["mediaharbor", "diskclean", "pdn-control", "chess-cli"],
+  "featuredProjects": ["pdn-control", "se-toolkit-hackathon", "iu-sport-parser", "mediaharbor", "diskclean"],
   "skills": ["Rust", "Python", "C++", "React", "Vite", "FastAPI", "PostgreSQL", "Redis", "SQLAlchemy", "Alembic", "Pydantic", "Docker", "egui", "Rayon", "Serde", "AutoHotkey", "Git"],
   "source": "https://github.com/ValekusVachpekus"
 }

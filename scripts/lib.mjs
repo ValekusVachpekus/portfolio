@@ -19,7 +19,7 @@ export function orderedGroups(groups, projects, metadata = {}) {
   });
 }
 export function safeUrl(value, { local = false } = {}) {
-  if (local && /^documents\/[a-zA-Z0-9_./-]+$/.test(value) && !value.split('/').includes('..')) return value;
+  if (local && /^(?:documents|videos)\/[a-zA-Z0-9_./-]+$/.test(value) && !value.split('/').includes('..')) return value;
   const url = new URL(value);
   if (!['https:', 'mailto:'].includes(url.protocol)) throw new Error(`Unsupported URL: ${value}`);
   return value;
